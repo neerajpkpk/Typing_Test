@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ─── SEO Basic ─────────────────────────────────────── -->
+  <title>Free Typing Test Online | Check WPM & Accuracy | Easy Medium Hard</title>
+  <meta name="description" content="Free online typing test to check your typing speed in WPM and accuracy. Choose Easy, Medium or Hard passages. 1 min, 3 min, 5 min timed tests. Get a typing certificate instantly!">
+  <meta name="keywords" content="typing test, typing speed test, WPM test, online typing test, free typing test, typing practice, keyboard speed test, typing certificate, typing test easy medium hard">
+  <meta name="author" content="Typing Test">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://YOUR-SITE-URL.netlify.app/">
+
+  <!-- ─── Open Graph (WhatsApp, Facebook preview) ──────── -->
+  <meta property="og:title" content="Free Typing Test Online | WPM Speed Test">
+  <meta property="og:description" content="Test your typing speed and accuracy for free. Easy, Medium and Hard levels. Get certified!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://YOUR-SITE-URL.netlify.app/">
+
+  <!-- ─── Twitter Card ──────────────────────────────────── -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Typing Test Online | WPM Speed Test">
+  <meta name="twitter:description" content="Test your typing speed and accuracy for free. Easy, Medium and Hard levels. Get certified!">
+
+  <!-- ─── Schema Markup (Google rich results) ──────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Typing Test",
+    "description": "Online typing speed test with WPM counter, accuracy tracker, and typing certificate. Easy, Medium and Hard difficulty levels.",
+    "url": "https://YOUR-SITE-URL.netlify.app/",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div style="display:flex;align-items:center;gap:20px">
+      <div class="logo">typing<span>.com</span></div>
+      <nav>
+        <a href="#">Lessons</a>
+        <a href="#" class="active">Tests</a>
+        <a href="#">Games</a>
+        <a href="#">Progress</a>
+        <a href="#">Themes</a>
+      </nav>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn-plus">👑 Get PLUS!</button>
+      <button class="btn-signup">Sign Up Free!</button>
+      <a href="#" style="color:white;font-size:13px;text-decoration:none">Log In</a>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-promo">
+        <p>Don't lose the progress on your tests!</p>
+        <div class="btns">
+          <button class="btn-login">Log In</button>
+          <button class="btn-create">Create Free Account</button>
+        </div>
+      </div>
+
+      <div class="section-title">Timed Tests</div>
+      <ul class="test-list">
+        <li class="test-item active" onclick="selectTest(this, 60)">
+          <span class="test-name">1:00 Test</span>
+          <button class="btn-start" onclick="startTest(event)">▶ Start Test</button>
+        </li>
+        <li class="test-item" onclick="selectTest(this, 180)">
+          <span class="test-name">3:00 Test</span>
+          <button class="btn-start" onclick="startTest(event)">▶ Start Test</button>
+        </li>
+        <li class="test-item" onclick="selectTest(this, 300)">
+          <span class="test-name">5:00 Test</span>
+          <button class="btn-start" onclick="startTest(event)">▶ Start Test</button>
+        </li>
+      </ul>
+
+      <div class="section-title">Page Tests</div>
+      <ul class="test-list">
+        <li class="test-item" onclick="selectTest(this, 60)">
+          <span class="test-name">1 Page Test</span>
+          <button class="btn-start" onclick="startTest(event)">▶ Start Test</button>
+        </li>
+        <li class="test-item" onclick="selectTest(this, 120)">
+          <span class="test-name">2 Page Test</span>
+          <button class="btn-start" onclick="startTest(event)">▶ Start Test</button>
+        </li>
+        <li class="test-item" onclick="selectTest(this, 180)">
+          <span class="test-name">3 Page Test</span>
+          <button class="btn-start" onclick="startTest(event)">▶ Start Test</button>
+        </li>
+      </ul>
+
+      <!-- DB status -->
+      <div class="db-info">
+        <div class="label">PASSAGE DATABASE</div>
+        <div id="db-status">⏳ Loading...</div>
+        <div id="db-count"></div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+      <!-- Loading -->
+      <div class="loading-bar" id="loading-bar">
+        <div class="spinner"></div>
+        <div>Loading passages from database...</div>
+      </div>
+
+      <!-- Test Panel -->
+      <div class="test-panel" id="test-panel">
+        <div class="timer-bar">
+          <div id="timer-display" class="timer-display">1:00</div>
+          <div class="diff-inline">
+            <button class="btn-diff-inline active" id="diff-easy"   onclick="setDifficulty('easy',   this)">🟢 Easy</button>
+            <button class="btn-diff-inline"        id="diff-medium" onclick="setDifficulty('medium', this)">🟡 Medium</button>
+            <button class="btn-diff-inline"        id="diff-hard"   onclick="setDifficulty('hard',   this)">🔴 Hard</button>
+          </div>
+          <div class="timer-actions">
+            <button class="btn-action" onclick="resetTest()">↻ Redo</button>
+            <button class="btn-action" onclick="nextPassage()">⏭ Next Passage</button>
+          </div>
+        </div>
+        <div class="passage-meta" id="passage-meta">Passage #1 of 51</div>
+        <div class="passage-container" id="passage" onclick="focusInput()">
+          <div id="chars-container"></div>
+          <div class="pause-msg" id="pause-msg">⌨️ &nbsp; Start Typing!</div>
+        </div>
+        <div class="stats-bar">
+          <div class="stat"><div class="stat-val" id="live-wpm">0</div><div class="stat-lbl">WPM</div></div>
+          <div class="stat"><div class="stat-val" id="live-acc">100%</div><div class="stat-lbl">Accuracy</div></div>
+          <div class="stat"><div class="stat-val" id="live-chars">0</div><div class="stat-lbl">Characters</div></div>
+          <div class="stat"><div class="stat-val" id="live-errors">0</div><div class="stat-lbl">Errors</div></div>
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="results-panel" id="results-panel">
+        <div class="result-wpm" id="res-wpm">0</div>
+        <div class="result-label">Words Per Minute</div>
+        <div class="result-grid">
+          <div class="stat"><div class="stat-val" id="res-acc">0%</div><div class="stat-lbl">Accuracy</div></div>
+          <div class="stat"><div class="stat-val" id="res-chars">0</div><div class="stat-lbl">Correct Chars</div></div>
+          <div class="stat"><div class="stat-val" id="res-errors">0</div><div class="stat-lbl">Errors</div></div>
+        </div>
+        <button class="btn-retry" onclick="resetTest()">↻ Try Again</button>
+        <button class="btn-cert"  onclick="printCert()">🏆 Print Certificate</button>
+      </div>
+
+      <!-- History Panel -->
+      <div class="history-panel">
+        <div class="history-header">
+          <span class="history-title">Your Test History (Last 30)</span>
+          <div class="sort-links">
+            Sort:
+            <span class="sort-link active-sort" onclick="sortHistory('date', this)">Date</span> |
+            <span class="sort-link"             onclick="sortHistory('wpm',  this)">Speed</span> |
+            <span class="sort-link"             onclick="sortHistory('acc',  this)">Accuracy</span>
+          </div>
+        </div>
+        <div id="history-list"></div>
+        <div id="no-history" style="font-size:13px;color:#94a3b8;text-align:center;padding:16px 0">
+          Complete a test to see your history here!
+        </div>
+      </div>
+
+    </div><!-- /.content -->
+  </div><!-- /.main -->
+</div><!-- /#app -->
+
+<script src="script.js"></script>
+</body>
+</html>
